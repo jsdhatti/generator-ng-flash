@@ -1,17 +1,17 @@
 import CoreModule from '../src/core/core.js';
-import HomeModule from '../src/components/home/home.js';
-import HomeController from '../src/components/home/home.controller.js';
-import HomeComponent from '../src/components/home/home.component.js';
-import HomeTemplate from '../src/components/home/home.html';
+import HelloModule from '../src/components/hello/hello.js';
+import HelloController from '../src/components/hello/hello.controller.js';
+import HelloComponent from '../src/components/hello/hello.component.js';
+import HelloTemplate from '../src/components/hello/hello.html';
 
-describe('Home', () => {
+describe('Hello', () => {
   let makeController;
 
   beforeEach(angular.mock.module(CoreModule));  // eslint-disable-line
-  beforeEach(angular.mock.module(HomeModule));  // eslint-disable-line
+  beforeEach(angular.mock.module(HelloModule));  // eslint-disable-line
   beforeEach(inject(() => {
     makeController = () => {
-      return new HomeController();
+      return new HelloController();
     };
   }));
 
@@ -31,21 +31,21 @@ describe('Home', () => {
     // template specs
     // tip: use regex to ensure correct bindings are used e.g., {{  }}
     it('has schema/form/model in template', () => {
-      // expect(HomeTemplate).to.match(/\s?vm\.schema\s?/g);
+      // expect(HelloTemplate).to.match(/\s?vm\.schema\s?/g);
     });
   });
 
 
   describe('Component', () => {
     // component/directive specs
-    let component = HomeComponent;
+    let component = HelloComponent;
 
     it('includes the intended template',() => {
-      expect(component.template).to.equal(HomeTemplate);
+      expect(component.template).to.equal(HelloTemplate);
     });
 
     it('invokes the right controller', () => {
-      expect(component.controller).to.equal(HomeController);
+      expect(component.controller).to.equal(HelloController);
     });
   });
 

@@ -5,17 +5,17 @@ export function configuration($urlRouterProvider) {
 export function routingEvents($rootScope) {
 
   let notFound = $rootScope.$on('$stateNotFound',
-    (event /*, unfoundState, fromState, fromParams*/) => {
+    (/*event, unfoundState, fromState, fromParams*/) => {
 
     });
 
   let onError = $rootScope.$on('$stateChangeError',
-    (event /*, toState, toParams, fromState, fromParams, error*/) => {
+    (/*event, toState, toParams, fromState, fromParams, error*/) => {
 
     });
 
   let onSuccess = $rootScope.$on('$stateChangeStart',
-    (event /*, toState, toParams, fromState, fromParams*/) => {
+    (/*event, toState, toParams, fromState, fromParams*/) => {
 
     });
 

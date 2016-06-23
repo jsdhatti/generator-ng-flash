@@ -11,6 +11,7 @@ function getFiles(dirPath, files) {
   var dir = fs.readdirSync(dirPath);
   _.each(dir, (file) => {
     var name = `${dirPath}/${file}`;
+    console.log(name);
     if (fs.statSync(name).isDirectory())
       getFiles(name, files);
     else
@@ -22,3 +23,5 @@ function getFiles(dirPath, files) {
 function capitalize(str) {
   return str.charAt(0) + str.slice(1);
 }
+
+getFiles("/Users/talhakhan/Talha/Programming/Web-Projects/generator-ng-flash/generators/app/templates");

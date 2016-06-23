@@ -16,7 +16,10 @@ module.exports = yeoman.Base.extend({
         type: 'input',
         name: 'name',
         message: 'Project name?',
-        default: this.appname
+        default: this.appname,
+        filter: (name) => {
+          return _.kebabCase(name);
+        }
       },{
         type: 'input',
         name: 'initials',
@@ -69,6 +72,6 @@ module.exports = yeoman.Base.extend({
   },
 
   install: function() {
-    this.installDependencies();
+    this.npmInstall();
   }
 });
