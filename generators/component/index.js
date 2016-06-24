@@ -9,7 +9,7 @@ var helper = require('../../helper');
 module.exports = yeoman.Base.extend({
   prompting: function() {
     this.log(yosay(
-      'Welcome to the bedazzling ' + chalk.red('generator-ng-flash') + ' component generator!'
+      chalk.red('generator-ng-flash') + ' component generator!'
     ));
 
     var prompts = [{
@@ -41,9 +41,9 @@ module.exports = yeoman.Base.extend({
     });
 
     function outputFile(path, componentName) {
-      var tmp = path.split('.');
-      tmp[0] = componentName;
-      return tmp.join('.');
+      var name = path.split('.');
+      name[0] = componentName;
+      return name.join('.');
     }
   },
 
