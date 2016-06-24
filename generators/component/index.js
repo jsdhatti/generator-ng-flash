@@ -5,6 +5,7 @@ var chalk = require('chalk');
 var yosay = require('yosay');
 var _ = require('lodash');
 var helper = require('../../helper');
+var fs = require('fs');
 
 module.exports = yeoman.Base.extend({
   prompting: function() {
@@ -27,24 +28,22 @@ module.exports = yeoman.Base.extend({
   },
 
   writing: function() {
-    var done = this.async();
-
     helper.appendComponent(this.destinationRoot(), this.props.name);
+
+    fs.mkdirSync(this.destinationRoot() + '/' + this.props.name);
 
     var files = helper.files(__dirname + '/templates');
     _.each(files, (file) => {
       var path = file.split('templates/')[1];
         this.fs.copyTpl(
           this.templatePath(path),
-          this.destinationPath(outputFile(path, this.props.name)),
+          this.destinationPath(this.props.name + '/' + outputFile(path, this.props.name)),
           {
             name: this.props.name,
             capitalName: _.capitalize(this.props.name)
           }
         );
     });
-
-    done();
 
     function outputFile(path, componentName) {
       var name = path.split('.');
