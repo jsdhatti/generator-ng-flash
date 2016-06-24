@@ -11,7 +11,6 @@ function getFiles(dirPath, files) {
   var dir = fs.readdirSync(dirPath);
   _.each(dir, (file) => {
     var name = `${dirPath}/${file}`;
-    console.log(name);
     if (fs.statSync(name).isDirectory())
       getFiles(name, files);
     else
