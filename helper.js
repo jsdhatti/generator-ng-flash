@@ -23,5 +23,3 @@ function getFiles(dirPath, files) {
 function capitalize(str) {
   return str.charAt(0) + str.slice(1);
 }
-
-getFiles("/Users/talhakhan/Talha/Programming/Web-Projects/generator-ng-flash/generators/app/templates");
