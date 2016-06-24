@@ -27,6 +27,10 @@ module.exports = yeoman.Base.extend({
   },
 
   writing: function() {
+    var done = this.async();
+
+    helper.appendComponent(this.destinationRoot(), this.props.name);
+
     var files = helper.files(__dirname + '/templates');
     _.each(files, (file) => {
       var path = file.split('templates/')[1];
@@ -39,6 +43,8 @@ module.exports = yeoman.Base.extend({
           }
         );
     });
+
+    done();
 
     function outputFile(path, componentName) {
       var name = path.split('.');
