@@ -1,11 +1,7 @@
 export default class HelloController {
-  constructor(HelloService, HelloConstants) {
+  constructor(HelloService, helloConstants) {
     this.name = 'HelloController';
     this.service = HelloService;
-    this.constants = HelloConstants;
-  }
-
-  say() {
-    return this.constants.word;
+    this.constants = helloConstants;
   }
 }

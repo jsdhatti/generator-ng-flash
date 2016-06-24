@@ -49,18 +49,21 @@ module.exports = yeoman.Base.extend({
   },
 
   writing: function() {
-    var files = helper.files(__dirname + '/templates');
-    _.each(files, (file) => {
-      var path = file.split('templates/')[1];
-      if (path.match(/png|jpe?g|gif/))
+    var paths = helper.files(`${__dirname}/${helper.templateFolder}`);
+
+    _.each(paths, (path) => {
+      var fileName = helper.getFileName(path);
+
+      if (fileName.match(/png|jpe?g|gif/)){
         this.fs.copy(
-          this.templatePath(path),
-          this.destinationPath(path)
+          this.templatePath(fileName),
+          this.destinationPath(fileName)
         );
-      else
+      }
+      else{
         this.fs.copyTpl(
-          this.templatePath(path),
-          this.destinationPath(path),
+          this.templatePath(fileName),
+          this.destinationPath(fileName),
           {
             name: this.props.name,
             initials: this.props.initials,
@@ -68,6 +71,7 @@ module.exports = yeoman.Base.extend({
             license: this.props.license
           }
         );
+      }
     });
   },
 

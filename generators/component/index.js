@@ -28,28 +28,40 @@ module.exports = yeoman.Base.extend({
   },
 
   writing: function() {
-    helper.appendComponent(this.destinationRoot(), this.props.name);
+    const callingPath = this.destinationRoot();
+    const newComponentPath = `${callingPath}/${this.props.name}`;
+    const componentName = this.props.name;
+    const templatePath = `${__dirname}/${helper.templateFolder}`;
 
-    fs.mkdirSync(this.destinationRoot() + '/' + this.props.name);
+    // Appending new component entry in component.js
+    helper.appendComponent(callingPath, componentName);
 
-    var files = helper.files(__dirname + '/templates');
-    _.each(files, (file) => {
-      var path = file.split('templates/')[1];
-        this.fs.copyTpl(
-          this.templatePath(path),
-          this.destinationPath(this.props.name + '/' + outputFile(path, this.props.name)),
-          {
-            name: this.props.name,
-            capitalName: _.capitalize(this.props.name)
-          }
-        );
+    // Create new component folder
+    mkdir(newComponentPath);
+
+    // Get template files
+    var paths = helper.files(templatePath);
+
+    // Copying files
+    _.each(paths, (path) => {
+      copy.call(this, helper.getFileName(path));
     });
 
-    function outputFile(path, componentName) {
-      var name = path.split('.');
-      name[0] = componentName;
-      return name.join('.');
+    function copy(fileName) {
+      this.fs.copyTpl(
+        this.templatePath(fileName),
+        this.destinationPath(`${componentName}/${fileName.replace(helper.templateName, componentName)}`),
+        {
+          name: componentName,
+          capitalName: _.capitalize(componentName)
+        }
+      );
     }
+
+    function mkdir(path) {
+      fs.mkdirSync(path);
+    }
+
   },
 
   install: function() {
