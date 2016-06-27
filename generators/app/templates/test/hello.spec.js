@@ -3,15 +3,17 @@ import HelloModule from '../src/components/hello/hello.js';
 import HelloController from '../src/components/hello/hello.controller.js';
 import HelloComponent from '../src/components/hello/hello.component.js';
 import HelloTemplate from '../src/components/hello/hello.html';
+import HelloService from '../src/components/hello/hello.service.js';
+import HelloConstants from '../src/components/hello/hello.constants.js';
 
 describe('Hello', () => {
   let makeController;
 
   beforeEach(angular.mock.module(CoreModule));  // eslint-disable-line
   beforeEach(angular.mock.module(HelloModule));  // eslint-disable-line
-  beforeEach(inject(() => {
+  beforeEach(inject(($http) => {
     makeController = () => {
-      return new HelloController();
+      return new HelloController(new HelloService($http), HelloConstants);
     };
   }));
 

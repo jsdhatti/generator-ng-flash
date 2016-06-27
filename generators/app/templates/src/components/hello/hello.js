@@ -11,6 +11,6 @@ export default  angular.module('<%= initials %>.hello', [])
         template: '<hello></hello>'
       });
   })
-  .constant('HelloConstants', constants)
+  .constant('helloConstants', constants)
   .service('HelloService', service)
   .component('hello', component);
