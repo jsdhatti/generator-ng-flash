@@ -36,20 +36,22 @@ function appendComponent(dirPath, name) {
   try{
     text = read(path);
   }catch(ex) {
-    console.error(`file not found ${path} \nThis command will only run in ..src/components folder`);
+    console.error(`file not found ${path} \nThis command will only run inside
+      YOUR_APPLICATION_PATH/src/components folder`);
     process.exit(1);
   }
 
-  // Split by ; to break LOC in array to easily add new component import
+  // Split by ; to break LOC in array to easily add new line for component import
   var file = text.split(';');
 
-  // Adding import in second last place as last statement is module registration
+  // Adding import in second last place. Not in the last place because last statement
+  // is module registration
   file.splice((file.length -2), 0, importText);
 
-  // Now removing module registration closing end
+  // Now removing module registration closing paranthesis
   file = file.join(';').split(']);')[0];
 
-  // Remove line break from last item in module registration and add new component entry
+  // Remove line break from last item in module registration to add new component entry
   let ind = file.lastIndexOf('\r\n');
   file = file.slice(0, ind) + moduleText;
 

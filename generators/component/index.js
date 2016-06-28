@@ -14,13 +14,20 @@ module.exports = yeoman.Base.extend({
     ));
 
     var prompts = [{
-        type: 'input',
-        name: 'name',
-        message: 'Component name?',
-        filter: (name) => {
-          return _.camelCase(name);
-        }
-      }];
+      type: 'input',
+      name: 'name',
+      message: 'Component name?',
+      filter: (str) => {
+        return _.camelCase(str);
+      }
+    }, {
+      type: 'input',
+      name: 'initials',
+      message: 'App module name?',
+      filter: (str) => {
+        return _.camelCase(str);
+      }
+    }];
 
     return this.prompt(prompts).then(function (props) {
       this.props = props;
@@ -31,6 +38,7 @@ module.exports = yeoman.Base.extend({
     const callingPath = this.destinationRoot();
     const newComponentPath = `${callingPath}/${this.props.name}`;
     const componentName = this.props.name;
+    const initials = this.props.initials;
     const templatePath = `${__dirname}/${helper.templateFolder}`;
 
     // Appending new component entry in component.js
@@ -53,7 +61,8 @@ module.exports = yeoman.Base.extend({
         this.destinationPath(`${componentName}/${fileName.replace(helper.templateName, componentName)}`),
         {
           name: componentName,
-          capitalName: _.capitalize(componentName)
+          capitalName: _.capitalize(componentName),
+          appModule: initials
         }
       );
     }
