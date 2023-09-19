@@ -1,2 +1,2 @@
 # generator-ng-flash
-Angular 1.5 components with webpack generator
+Angular 1.5x components with webpack generator
